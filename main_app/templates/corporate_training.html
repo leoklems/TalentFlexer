@@ -1,0 +1,78 @@
+{% extends 'main_app.html' %}
+{% load static %}
+{% block title %}Corporate training{% endblock %}
+
+{% block content %}
+    <main id="main">
+        {% include 'header.html' %}
+        <main id="main__body">
+            <article class="coorporate__slide__art">
+                <section class="cooperate__slide__items"
+                         style="background: url({% static 'assets/images/about-banner.jpg'%});">
+                    <div class="container">
+                        <h2 class="animates">corporate training</h2>
+                        <ul>
+                            <li><a href="https://globalstride.net">Home</a>
+                            </li>
+                            <li>/</li>
+                            <li>Corporate Training</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+            <article class="coorporate__training__info">
+                <div class="coorporate__training__info__img"
+                     style="background-image: url({% static 'assets/images/corporate_training.jpg'%});"></div>
+                <section class="cooporate__training__info__sec">
+                    <h2>corporate training</h2>
+                    <p>If you are an organization looking for customized training at your workplace, on the internet (self-paced or live instructor-led), or at a place of your choice, Global Stride Consulting can tailor the solution and deliver it to you.
+                    </p>
+                    <p>Currently we offer customized training in the following frameworks and tools:</p>
+                    <ul>
+                        <li>Business Analysis</li>
+                        <li>Project Management Professional (PMP)</li>
+                        <li>Business Intelligence and Data Analytics</li>
+                        <li>ITIL Foundation</li>
+                        <li>SQL Foundation</li>
+                        <li>Quality Assurance and Software Testing</li>
+                        <li>Scrum Master Training</li>
+                        <li>Scrum Product Owner Training</li>
+                    </ul>
+                </section>
+                <section class="coorporate__training__info__contact container">
+                    <div class="coorporate__training__contact__form__div__touch">
+                        <form action="" class="coorporate__training__contact__form">
+                            <h2>get in touch</h2>
+                            <p>Please drop us a message for your customized training needs and we will have one of our Account Managers get back with a quote or call you back.
+                            </p>
+                            <input type="text" class="form__two__one form_control" placeholder="Name">
+                            <input type="email" class="form__two__one  form_control" placeholder="Email">
+                            <textarea name="" class="form__one__one form_control" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                            <input type="submit" class="form__submit__btn" value="submit ">
+                        </form>
+                    </div>
+                    <div class="coorporate__training__contact__us__div">
+                        <div>
+                            <h4>contact us</h4>
+                            <p>Don’t hesitate to contact with us for more information</p>
+                            <ul>
+                                <li><span><i class="fa fa-phone" aria-hidden="true"></i></span> <a href="tel:+12896522631">+1 289 652 2631</a>
+                                </li>
+                                <li><span><i class="fa fa-globe" aria-hidden="true"></i></span>77 City Centre Drive, East Tower, Suite 501,Mississauga, ON L5B 1M5</li>
+                                <li><span><i class="fa fa-envelope" aria-hidden="true"></i></span><a href="mailto:info@globalstride.net">info@globalstride.net</a>
+                                </li>
+                            </ul>
+                            <section class="cooperate__training__social__list">
+                                <a href=" " class="cooperate__training__social__link"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+                                <a href=" " class="cooperate__training__social__link"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                <a href=" " class="cooperate__training__social__link"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </main>
+        {% include 'footer.html' %}
+    </main>
+{% endblock %}
+

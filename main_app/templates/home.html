@@ -1,0 +1,135 @@
+{% extends 'main_app.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <main id="main">
+        {% include 'header.html' %}
+        <main id="main__body">
+            {% if slides %}
+            <article id="main__body__banner__container" class="main__body__banner__container">
+                <section id="main__body__banners" class="main__body__banners">
+                    {%for s in slides%}
+                    <article class="main__body__banner mySlides fade" id="main__body__slide__1"
+                             style="background-image: url({{s.image.url}});">
+                        <section class="banner__info">
+                            <header>{{s.title}}</header>
+                            <div>{{s.detail}}</div>
+                            <a href="{{s.link}}">contact us</a>
+                        </section>
+                    </article>
+                    {%endfor%}
+                </section>
+            </article>
+            {%else%}
+            {%endif%}
+            <article class="main__body__about__section container">
+                <section class="about__section__one">
+                    <div class="about__section__one__item">
+                        <i class="fas fa-users"></i>
+                        <h4>co op placements</h4>
+                        <p>
+                            If you are a new graduate looking for co-op or internship opportunities, contact us immediately, we can help you
+                        </p>
+                    </div>
+                    <div class="about__section__one__item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Accreditation</h4>
+                        <p>
+                            We are accredited by International Institute of Business Analysis (IIBA) as an Endorsed Education Provider (EEP).
+                        </p>
+                    </div>
+                    <div class="about__section__one__item">
+                        <i class="fas fa-book"></i>
+                        <h4>Tons of Resources</h4>
+                        <p>
+                            We provide tons of educational resources to aid and support our courses.
+                        </p>
+                    </div>
+                </section>
+                <section class="about__section__two animated">
+                    <div class="about__image">
+                        <img src="{% static 'assets/images/about-me-new.png'%}" alt="" class="about__img">
+                    </div>
+                    <div class="about__text section__title">
+                        <h5>who we are?</h5>
+                        <h2 class="text__underlined">talent flexer</h2>
+                        <p>
+                            Talent Flexer Consulting is a full-service IT training firm providing a range of training services for both individual learners as well as corporate clients around the world. With our staff of highly knowledgeable and experienced professionals, we offer
+                            online as well as in-class courses in the area of business, supply chain/procurement and information technology.
+                        </p>
+                        <p>
+                            We offer an unrivalled practical and real-world approach to Business Analysis training, Project Management Training, Scrum Master Training and Business Intelligence Training.
+                        </p>
+                        <section>
+                            <h5>great technology</h5>
+                            <h5>Best industry leaaders</h5>
+                            <h5>learn course online</h5>
+                            <h5>great technology</h5>
+                            <h5>great technology</h5>
+                            <h5>great technology</h5>
+                        </section>
+                    </div>
+                </section>
+            </article>
+            <article class="main__body__course__of__study__container container">
+                <section class="course__of__study__title">
+                    <section class="course__of__study__sides"></section>
+                    <section class="course__of__study__title__info">
+                        <h5>best courses</h5>
+                        <h2>Featured courses</h2>
+                    </section>
+                    <section class="course__of__study__sides"></section>
+                </section>
+                <section class="course__of__study__items"></section>
+            </article>
+            <article class="main__body__eam__block  container">
+                <section class="team__block__section">
+                    <div class="team__block__container">
+                        <section class="team__block__images"></section>
+                        <section class="team__block__info">
+                            <div class="team__block__title section__title">
+                                <h5>meet our tean</h5>
+                                <h2 class="text__underlined">professional consulting team</h2>
+                            </div>
+                            <div class="team__block__content">
+                                <p>
+                                    Talent Flexer instructors are working professionals who average over 10 years of experience in the fields in which they teach. They are outstanding experts in their subject matter, but what truly sets them apart is that they are also expert instructors.
+                                    Talent Flexer instructors undergoes intensive training to learn the best ways to present information, mentor, and create dynamic presentations that bring the classroom and online sessions to life. Our talented instructors
+                                    engage participants and pass their expertise on to them with practical, hands-on skills they can use right away to solve the challenges they’ll face in the real world.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </article>
+            <article class="main__body__testimonial__block container">
+                <section class="testimonial__block__section">
+                    <div class="testimonial__block__container">
+                        <section class="testimonial__title__info">
+                            <section class="testimonial__block__title section__title">
+                                <h5>testimonials</h5>
+                                <h2>authenticity, honesty, & personal voice</h2>
+                            </section>
+                            <section class="btn__link__area">
+                                <div class="btn-links-area">
+                                    <button class="btn__links btn__prev">
+                                       <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn__links btn__next">
+                                       <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </section>
+                        </section>
+                        <section class="testimonial__block__content">
+                            <div class="testimonial__slide__area"></div>
+                        </section>
+                    </div>
+                </section>
+            </article>
+        </main>
+        {% include 'footer.html' %}
+    </main>
+{% endblock %}
+
