@@ -6,6 +6,20 @@ $(document).ready(function() {
         // $('.hm__menu__btn').toggleClass('hm__menu__btn__trig');
 
     })
+    $("#courses__nav__out").click(function(event) {
+        event.preventDefault();
+        $('.course__nav__items').toggleClass('course__nav__items__triggered');
+        $('#hm_nav_cat_outs').toggleClass('menu_triggered');
+    })
+
+//    $(".hm_nav_cat").click(function(event) {
+//        // event.preventDefault();
+//        // controling the contact us menu button link
+//        $('.hm_nav_cat').removeClass('hm_nav_cat_triggered');
+//        $('.hm__nav').toggleClass('hm__nav__triggered');
+//        // $('.fa-arrow-right').toggleClass('fa-arrow-down');
+//
+//    })
     currentSlide();
 });
 

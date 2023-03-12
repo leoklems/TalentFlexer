@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>make payment</title>
+</head>
+<body>
+    <h5>Make payment for {{payment.learner.course.name}}: {{payment.amount}}</h5>
+<hr>
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+<!--        {{payment_form}}-->
+    <button onclick="payWithPayStack()">Payment</button>
+
+<script>
+    function payWithPayStack() {
+        let currency = 'CAD';
+        let plan ='';
+        let ref = "{{payment.ref}}"
+        let obj = {
+            key: "{{paystack_public_key}}",
+            email: "{{payment.email}}",
+            amount: "{{payment.amount_value}}",
+            ref: ref,
+            callback: function(response){
+                window.location.href = "{% url 'course_reg:verify_payment' payment.ref %}";
+            }
+        }
+        if (Boolean(currency)){
+            obj.currency = currency.toUpperCase()
+        }
+        if (Boolean(plan)){
+            obj.plan = plan;
+        }
+        var handler = PaystackPop.setup(obj);
+        handler.openIframe();
+    }
+</script>
+</body>
+</html>

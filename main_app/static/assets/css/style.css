@@ -218,6 +218,23 @@ main#general {
     color: var(--primary);
 }
 
+.course__nav__items {
+    display: none;
+}
+
+.course__nav__items__triggered {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr;
+    /*padding-left: 10px;
+    border-radius: 5px;
+    background: #f7fafb;*/
+    text-transform: capitalize;
+}
+.course__nav__items__triggered {
+    padding: 10px;
+}
+
 .main__body__banners {
     margin: 0px auto;
     background-color: transparent;
@@ -1110,6 +1127,14 @@ section.cooperate__slide__items:before {
         border-top: unset;
         width: unset;
         text-transform: capitalize;
+    }
+    .course__nav__items__triggered {
+        margin: 27px 0;
+        position: absolute;
+        padding: unset;
+    }
+    .course__nav__items a {
+        padding: 0;
     }
     .main__body__banners {
         height: 700px;

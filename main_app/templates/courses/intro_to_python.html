@@ -1,0 +1,11 @@
+{% extends 'main_app.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<p>{{course.name}}</p>
+<p>{{course.price}}</p>
+<p>{{course.next_start_date}}</p>
+<a href="{% url 'course_reg:course_registration' %}">Register</a>
+{% endblock %}
+

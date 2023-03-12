@@ -54,13 +54,18 @@
                             <a href="{% url 'app:home' %}" class="hm__nav__item__link">home</a>
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">courses</a>
+                            <a href="" id="courses__nav__out" class="hm__nav__item__link" >courses <i class="fas fa-caret-down"></i></a>
+                            <ul class="course__nav__items">
+                                <li class="hm_nav_cat_item">
+                                    <a href="{% url 'course_reg:intro_to_python' %}" id="hm_nav_cat_item_link" class="hm_nav_cat_item_link">Intro to Python</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="main__nav__list__item">
                             <a href="{% url 'app:home' %}" class="hm__nav__item__link" id="hm__nav__courses">corporate training</a>
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:home' %}" class="hm__nav__item__link" id="hm__nav__aboutus">gallary</a>
+                            <a href="{% url 'app:home' %}" class="hm__nav__item__link" id="hm__nav__aboutus">gallery</a>
                         </li>
                         <li id="main__nav__list__item">
                             <a href="{% url 'app:home' %}" id="hm__nav__item__link">about us</a>

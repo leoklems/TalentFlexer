@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b1060f5-4757-4c4d-99ab-c62dc6ddd6d3" name="Default Changelist" comment="">
+    <list default="true" id="4b1060f5-4757-4c4d-99ab-c62dc6ddd6d3" name="Default Changelist" comment="site access premision update">
+      <change afterPath="$PROJECT_DIR$/TalentFlexer/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/course_reg/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/course_reg/paystack.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/course_reg/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/templates/courses/intro_to_python.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/templates/forms/learner.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_app/templates/make_payment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TalentFlexer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/TalentFlexer/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TalentFlexer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/TalentFlexer/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/static/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/static/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/static/assets/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
@@ -30,12 +43,14 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main_app/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TalentFlexer" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Django_Projects\TalentFlexer\main_app\static" />
+      <recent name="C:\Django_Projects\TalentFlexer\TalentFlexer" />
+      <recent name="C:\Django_Projects\TalentFlexer\course_reg" />
       <recent name="C:\Django_Projects\TalentFlexer\main_app\templates" />
+      <recent name="C:\Django_Projects\TalentFlexer\main_app\static" />
       <recent name="C:\Django_Projects\TalentFlexer\main_app" />
     </key>
   </component>
@@ -48,6 +63,14 @@
       <option name="presentableId" value="Default" />
       <updated>1677768538074</updated>
     </task>
+    <task id="LOCAL-00001" summary="site access premision update">
+      <created>1678066257984</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678066257984</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -61,5 +84,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="site access premision update" />
+    <option name="LAST_COMMIT_MESSAGE" value="site access premision update" />
   </component>
 </project>

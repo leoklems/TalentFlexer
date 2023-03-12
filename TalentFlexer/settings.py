@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +55,7 @@ INSTALLED_APPS = [
     'ckeditor',
 
     'main_app',
+    'course_reg',
 ]
 
 SITE_ID = 1
@@ -166,3 +171,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+PAYSTACK_SECRETE_KEY = env('PAYSTACK_SECRETE_KEY')
+PAYSTACK_PUBLIC_KEY = env('PAYSTACK_PUBLIC_KEY')
