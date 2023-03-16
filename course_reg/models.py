@@ -27,36 +27,14 @@ class Learner(models.Model):
     address = models.TextField(max_length=500)
     province_state = models.CharField(max_length=50, blank=True, null=True)
     city = models.CharField(max_length=20)
-    zip_code = models.PositiveIntegerField(max_length=10)
+    zip_code = models.PositiveIntegerField()
     price = models.FloatField()
+    vat = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     paid = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
-#
-# class OrderModel(models.Model):
-#     code = models.CharField(max_length=50, null=True)
-#     course = models.ManyToManyField(Course)
-#     price = models.JSONField(null=True)
-#     amount = models.FloatField()
-#     created_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
-#     has_paid = models.BooleanField()
-#     status = models.CharField(max_length=20)
-
-#
-# class CheckOutModel(models.Model):
-#     learner = models.ForeignKey(Learner, on_delete=models.CASCADE)
-#     full_name = models.CharField(max_length=150)
-#     address = models.TextField()
-#     mobile = models.CharField(max_length=20)
-#     email = models.EmailField(null=True)
-#     payment_method = models.CharField(max_length=20)
-#     grand_total = models.FloatField()
-#     created_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
-#     ref = models.CharField(max_length=200)
-#     verified = models.BooleanField(default=False)
 
 
 class Payment(models.Model):

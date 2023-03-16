@@ -10,7 +10,7 @@ class LearnerForm(ModelForm):
     class Meta:
         model = Learner
         field = '__all__'
-        exclude = ['learner_id', 'price', 'created_at', 'paid']
+        exclude = ['learner_id', 'price', 'vat', 'created_at', 'paid']
 
         widgets = {
             'course': Select(attrs={

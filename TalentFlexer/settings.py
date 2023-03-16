@@ -53,10 +53,13 @@ INSTALLED_APPS = [
     "verify_email",
     'widget_tweaks',
     'ckeditor',
+    'paypal.standard.ipn',
 
     'main_app',
     'course_reg',
 ]
+
+PAYPAL_TEST = True
 
 SITE_ID = 1
 
@@ -175,3 +178,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 PAYSTACK_SECRETE_KEY = env('PAYSTACK_SECRETE_KEY')
 PAYSTACK_PUBLIC_KEY = env('PAYSTACK_PUBLIC_KEY')
+PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID')

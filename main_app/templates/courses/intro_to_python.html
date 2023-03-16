@@ -3,9 +3,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<p>{{course.name}}</p>
-<p>{{course.price}}</p>
-<p>{{course.next_start_date}}</p>
-<a href="{% url 'course_reg:course_registration' %}">Register</a>
+<main id="main">
+        {% include 'header.html' %}
+        <main id="main__body" class="container main__body__about__section">
+            <p>{{course.name}}</p>
+            <p>{{course.price}}</p>
+            <p>{{course.next_start_date}}</p>
+            <a href="{% url 'course_reg:course_registration' %}" class="google__map__btn">Register</a>
+        </main>
+        {% include 'footer.html' %}
+    </main>
 {% endblock %}
 

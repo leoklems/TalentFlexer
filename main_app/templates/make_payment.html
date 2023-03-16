@@ -1,39 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>make payment</title>
+    {%include 'meta.html'%}
+    <title>{% block title %}Make payment {% endblock %}</title>
+    {% load static %}
+    {%include 'css_bootstrap.html'%}
+
 </head>
 <body>
-    <h5>Make payment for {{payment.learner.course.name}}: {{payment.amount}}</h5>
-<hr>
-        <script src="https://js.paystack.co/v1/inline.js"></script>
-<!--        {{payment_form}}-->
-    <button onclick="payWithPayStack()">Payment</button>
+<section class="page-section padding-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-md-offset-4">
+                    <aside class="sidebar">
+                        <div class="widget">
 
+                            <p><strong>Order</strong></p>
+                            <div>
+                                 <span><strong>Course</strong> :</span><span>{{payment.learner.course}}</span>
+                             </div>
+                             <div>
+                                 <span><strong>Subtotal</strong> :</span><span>{{payment.learner.course.price}}</span>
+                             </div>
+                            <div>
+                                 <span><strong>GST(30%)</strong> :</span><span>{{payment.learner.vat}}</span>
+                             </div>
+                            <div>
+                                <span><strong>Total</strong> :</span><span>{{payment.amount}}</span>
+                             </div>
+                                <div id="paypal-button-container"></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+</section>
+
+    {%include 'js.html'%}
+<!--<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>-->
+<script src="https://www.paypal.com/sdk/js?client-id=AfT27L4aTCoquD8ujne061DmMts7ulNhRbS-SJWjWB9JXLcb_lOWmh2qqZtH4MaOhXjVlqMk8DKXj3WT&currency=CAD"></script>
 <script>
-    function payWithPayStack() {
-        let currency = 'CAD';
-        let plan ='';
-        let ref = "{{payment.ref}}"
-        let obj = {
-            key: "{{paystack_public_key}}",
-            email: "{{payment.email}}",
-            amount: "{{payment.amount_value}}",
-            ref: ref,
-            callback: function(response){
-                window.location.href = "{% url 'course_reg:verify_payment' payment.ref %}";
+		function getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+					const cookie = cookies[i].trim();
+					// Does this cookie string begin with the name we want?
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+					}
+				}
+			}
+			console.log(cookieValue)
+			return cookieValue;
+		}
+    	const csrftoken = getCookie('csrftoken');
+		let total = {{payment.amount}}
+
+		function completeOrder(){
+			const student = "{{student.lib_no}}"
+			let ref = "{{payment.ref}}"
+			const url = "{% url 'course_reg:verify_payment' payment.ref %}"
+
+			fetch(url, {
+			method:'POST',
+			headers: {
+				'content-type': 'application/json',
+				'X-CSRFToken': csrftoken,
+			},
+			body: JSON.stringify({'ref':ref})
+			})
+		}
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+<!--        	style:{-->
+<!--        		color: 'blue',-->
+<!--        		shape: 'rect',-->
+<!--        		label: 'pay',-->
+<!--        		height: 40-->
+<!--        	}-->
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    completeOrder()
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                    window.location.replace("{% url 'course_reg:payment_completed' %}")
+                });
             }
-        }
-        if (Boolean(currency)){
-            obj.currency = currency.toUpperCase()
-        }
-        if (Boolean(plan)){
-            obj.plan = plan;
-        }
-        var handler = PaystackPop.setup(obj);
-        handler.openIframe();
-    }
-</script>
+
+<!--            onError: (err) => {-->
+<!--                window.location.replace("{% url 'course_reg:payment_failed' %}")-->
+<!--            }-->
+
+
+        }).render('#paypal-button-container');
+    </script>
 </body>
 </html>
