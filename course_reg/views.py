@@ -22,7 +22,7 @@ from .forms import *
 from .models import *
 from django.db.models import Count
 from django.db.models import Q
-from paypal.standard.forms import PayPalPaymentsForm
+# from paypal.standard.forms import PayPalPaymentsForm
 
 
 def random_int():
@@ -137,25 +137,25 @@ def paymentComplete(request):
                       {'payment': payment, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
     # return JsonResponse('Payment completed!', safe=False)
 
-
-class PayPalFormView(FormView):
-    template_name = 'forms/paypal_form.html'
-    form_class = PayPalPaymentsForm
-
-    def get_initial(self):
-        return {
-            "business": '',
-            "amount": 20,
-            "currency": "CAD",
-            "item_name": '',
-            "invoice": 2345,
-            "notify_url": self.request.build_absolute_url(reverse('')),
-            "return_url": self.request.build_absolute_url(reverse('paypal-return')),
-            "cancel_url": self.request.build_absolute_url(reverse('paypal-cancel')),
-            "lc": 'EN',
-            "no_shipping": '1'
-        }
-
+#
+# class PayPalFormView(FormView):
+#     template_name = 'forms/paypal_form.html'
+#     form_class = PayPalPaymentsForm
+#
+#     def get_initial(self):
+#         return {
+#             "business": '',
+#             "amount": 20,
+#             "currency": "CAD",
+#             "item_name": '',
+#             "invoice": 2345,
+#             "notify_url": self.request.build_absolute_url(reverse('')),
+#             "return_url": self.request.build_absolute_url(reverse('paypal-return')),
+#             "cancel_url": self.request.build_absolute_url(reverse('paypal-cancel')),
+#             "lc": 'EN',
+#             "no_shipping": '1'
+#         }
+#
 
 def payment_completed(request):
     return render(request, 'payment_completed.html')

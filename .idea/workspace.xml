@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b1060f5-4757-4c4d-99ab-c62dc6ddd6d3" name="Default Changelist" comment="course and payment introduction">
-      <change afterPath="$PROJECT_DIR$/main_app/templates/css_bootstrap.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/forms/paypal_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/payment_completed.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/payment_failed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TalentFlexer/.env" beforeDir="false" afterPath="$PROJECT_DIR$/TalentFlexer/.env" afterDir="false" />
+    <list default="true" id="4b1060f5-4757-4c4d-99ab-c62dc6ddd6d3" name="Default Changelist" comment="paypal integration">
       <change beforePath="$PROJECT_DIR$/TalentFlexer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/TalentFlexer/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TalentFlexer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/TalentFlexer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_reg/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/course_reg/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_reg/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/course_reg/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_reg/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/course_reg/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course_reg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/course_reg/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/courses/intro_to_python.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/courses/intro_to_python.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/forms/learner.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/forms/learner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/make_payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/make_payment.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +65,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678591266549</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="paypal integration">
+      <created>1678970342291</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678970342291</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -98,6 +90,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="site access premision update" />
     <MESSAGE value="course and payment introduction" />
-    <option name="LAST_COMMIT_MESSAGE" value="course and payment introduction" />
+    <MESSAGE value="paypal integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="paypal integration" />
   </component>
 </project>

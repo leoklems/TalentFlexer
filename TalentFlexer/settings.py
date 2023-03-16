@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "verify_email",
     'widget_tweaks',
     'ckeditor',
-    'paypal.standard.ipn',
+    # 'paypal.standard.ipn',
 
     'main_app',
     'course_reg',
