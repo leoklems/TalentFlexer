@@ -6,19 +6,18 @@
                     <section class="main__header__top__left">
                         <span class="hm__main__header__top__address">
                             <i class="fas fa-map-marker-alt"></i>
-                                <span>Awka Nigeria.</span>
+                                <span>{{site_info.address}}</span>
                         </span>
                         <span class="hm__main__header__top__email">
                             <i class="fas fa-send"></i>
-                                <span>leoklems@aol.com</span>
+                                <span>{{site_info.email}}</span>
                         </span>
                     </section>
                     <section class="main__header__top__right">
                         <div id="hm__main__header__top__socials__div">
-                            <a class="hm__top__socials__item" href=""><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
-                            <a class="hm__top__socials__item" href=""><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                            <a class="hm__top__socials__item" href=""><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                            <a class="hm__top__socials__item" href=""><i class="fab fa-github" aria-hidden="true"></i></a>
+                            <a class="hm__top__socials__item" href="{{site_info.facebook}}"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+                            <a class="hm__top__socials__item" href="{{site_info.twitter}}"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a class="hm__top__socials__item" href="{{site_info.instagram}}"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         </div>
                     </section>
                 </div>
@@ -31,14 +30,14 @@
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h6>Email Us</h6>
-                                <section>email@email.com</section>
+                                <section>{{site_info.email}}</section>
                             </div>
                         </a>
                         <a href="" class="main__topbar__info middle__phone">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h6>Call Us</h6>
-                                <section>090767656544</section>
+                                <section>{{site_info.mobile_1}}</section>
                             </div>
                         </a>
                         <a href="" class="main__topbar__info__btn">get a quote</a>
@@ -55,32 +54,37 @@
                         </li>
                         <li class="main__nav__list__item">
                             <a href="" id="courses__nav__out" class="hm__nav__item__link" >courses <i class="fas fa-caret-down"></i></a>
+                            {% if courses %}
                             <ul class="course__nav__items">
+                                {%for c in courses%}
                                 <li class="hm_nav_cat_item">
-                                    <a href="{% url 'course_reg:intro_to_python' %}" id="hm_nav_cat_item_link" class="hm_nav_cat_item_link">Intro to Python</a>
+                                    <a href="{% url 'course_reg:course' c.course_id%}" id="hm_nav_cat_item_link" class="hm_nav_cat_item_link">{{c.name}}</a>
                                 </li>
+                                {%endfor%}
                             </ul>
+                            {%else%}
+                            {%endif%}
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:home' %}" class="hm__nav__item__link" id="hm__nav__courses">corporate training</a>
+                            <a href="{% url 'app:home' %}" class="hm__nav__item__link">corporate training</a>
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:home' %}" class="hm__nav__item__link" id="hm__nav__aboutus">gallery</a>
-                        </li>
-                        <li id="main__nav__list__item">
-                            <a href="{% url 'app:home' %}" id="hm__nav__item__link">about us</a>
+                            <a href="{% url 'app:gallery' %}" class="hm__nav__item__link">gallery</a>
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">cntact us</a>
+                            <a href="{% url 'app:home' %}" class="hm__nav__item__link">about us</a>
+                        </li>
+                        <li class="main__nav__list__item">
+                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">contact us</a>
                         </li>
                         <li class="main__nav__list__item">
                             <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">placement</a>
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link" id="hm__nav__courses">our instructors</a>
+                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">our instructors</a>
                         </li>
                         <li class="main__nav__list__item">
-                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link" id="hm__nav__aboutus">learn cours online</a>
+                            <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">learn cours online</a>
                         </li>
                         <li id="main__nav__list__item">
                             <a href="{% url 'app:corporate_training' %}" class="hm__nav__item__link">refere a friend</a>

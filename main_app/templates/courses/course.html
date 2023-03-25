@@ -8,11 +8,11 @@
         <main id="main__body">
             <article class="coorporate__slide__art">
                 <section class="cooperate__slide__items"
-                         style="background: url(/{% static 'assets/images/about-banner.jpg'%});">
+                         style="background: url({% static 'assets/images/about-banner.jpg'%});">
                     <div class="container cooperate__slide__banner">
-                        <h2 class="animates">corporate training</h2>
+                        <h2 class="animates">{{course.name}}</h2>
                         <ul>
-                            <li><a href="{% url 'main_app:home' %}">Home</a>
+                            <li><a href="{% url 'app:home' %}">Home</a>
                             </li>
                             <li>/</li>
                             <li><a href="">Course</a></li>
@@ -27,12 +27,12 @@
                     <div class="coorporate__training__contact__form__div__touch">
                         <img src="{{course.dp.url}}" alt="" class="course__dp__img">
                         <div>
-                            {course.description}}
+                            {{course.description |safe }}
                         </div>
                         <section class="course__benefits">
                             <h2>Benefits of taking the course</h2>
                             <ul>
-                                {%for b in course.benefits%}
+                                {%for b in course.benefits.all%}
                                 <li>{{b.content}}</li>
                                 {%endfor%}
                             </ul>
@@ -40,8 +40,8 @@
                         <section class="course__benefits">
                             <h2>Pre-Requisites:</h2>
                             <ul>
-                                {%for p in course.pre_requisites%}
-                                <li>{{b.content}}</li>
+                                {%for p in course.pre_requisites.all%}
+                                <li>{{p.content}}</li>
                                 {%endfor%}
                             </ul>
                         </section>
@@ -55,7 +55,7 @@
                     <div class="coorporate__training__contact__us__div">
                         <div>
                             <h4>Price:</h4>
-                            <p>{{course.price}}</p>
+                            <p>$ {{course.price}} CAD</p>
                             <a href="{% url 'course_reg:course_registration' %}" class="register__btn__2">Apply Now</a>
                         </div>
                         <div>

@@ -1,6 +1,6 @@
 {% extends 'main_app.html' %}
 {% load static %}
-{% block title %}Payment Completed{% endblock %}
+{% block title %}Gallery{% endblock %}
 
 {% block content %}
 <main id="main">
@@ -10,29 +10,26 @@
                 <section class="cooperate__slide__items"
                          style="background: url({% static 'assets/images/about-banner.jpg'%});">
                     <div class="container cooperate__slide__banner">
-                        <h2 class="animates">Payment Completed</h2>
+                        <h2 class="animates">gallery</h2>
                         <ul>
                             <li><a href="{% url 'app:home' %}">Home</a>
                             </li>
                             <li>/</li>
-                            <li>Payment completed</li>
+                            <li>gallery</li>
                         </ul>
                     </div>
                 </section>
             </article>
-            <article class="coorporate__training__info">
-                <section class="checkout__review__section container">
-                    <div class="course__reg">
-                        <h3 class="order__review__heading">
-                            <i class="far fa-check-circle" aria-hidden="true"></i> Payment completed
-                        </h3>
-                        <br>
-                        <p>
-                            Thanks for registering with us, you will received an email from us informing you of further engagements.
-                        </p>
-                    </div>
-                </section>
+            {% if images %}
+            <article class="our__gallery__info">
+                {%for image in images%}
+                <div class="gallery__img__item__div">
+                    <img src="{{image.image.url}}" alt="" class="gallery__img">
+                </div>
+                {%endfor%}
             </article>
+            {%else%}
+            {%endif%}
         </main>
         {% include 'footer.html' %}
     </main>

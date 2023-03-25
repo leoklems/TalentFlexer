@@ -25,7 +25,6 @@ urlpatterns = [
     path('', include('main_app.urls')),
     path('course/', include('course_reg.urls')),
     path('verification/', include('verify_email.urls')),
-    # path('paypal/', include('paypal.standard.ipn.urls')),
 
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),

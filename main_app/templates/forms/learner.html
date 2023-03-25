@@ -1,19 +1,146 @@
 {% extends 'main_app.html' %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}Register Learner{% endblock %}
 
 {% block content %}
 <main id="main">
         {% include 'header.html' %}
-        <main id="main__body" class="container main__body__about__section">
-            <form method="post" style="display: grid; gap: 10px;">
-                {% csrf_token %}
-                {{form}}
-                <p>
-                    <input type="submit" value="Register" class="google__map__btn">
-                </p>
-            </form>
+            <main id="main__body">
+            <article class="coorporate__slide__art">
+                <section class="cooperate__slide__items"
+                         style="background: url({% static 'assets/images/about-banner.jpg'%});">
+                    <div class="container cooperate__slide__banner">
+                        <h2 class="animates">Course registration</h2>
+                        <ul>
+                            <li><a href="{% url 'app:home' %}">Home</a>
+                            </li>
+                            <li>/</li>
+                            <li>Course</li>
+                            <li>/</li>
+                            <li>Intro top Python</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+            <article class="coorporate__training__info">
+                <section class="coorporate__training__info__contact container">
+                    <div class="course__reg">
+
+                        <form action="" method="post" class="course__reg__form">
+                            {% csrf_token %}
+                            <h2>Course Registration Form</h2>
+                            <div class="course__reg__form__divs">
+                                <div class="form__full__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Which course will you like to do?</label>
+                                            <br>
+                                            <span>
+                                                {{form.course}}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">First Name</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="first_name" class="course__form__input" placeholder="Enter First Name">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Last Name</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="last_name" class="course__form__input" placeholder="Enter Last Name">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Phone Number</label>
+                                            <br>
+                                            <span>
+                                                <input type="tel" name="phone_no" class="course__form__input" placeholder="Enter Phone Number">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Email Address</label>
+                                            <br>
+                                            <span>
+                                                <input type="email" name="email" class="course__form__input" placeholder="Enter Email Address">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__full__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Home Address</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="address" class="course__form__input" placeholder="Enter Home Address">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Province or State</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="province_state" class="course__form__input" placeholder="Enter Province or State">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">City</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="city" class="course__form__input" placeholder="Enter City">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form__half__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Postal or Zipcode</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="zip_code" class="course__form__input" placeholder="Enter Postal or Zipcode">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="course__submit">
+                                    <input type="submit" class="course__submit__btn">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </section>
+            </article>
         </main>
+<!--        </main>-->
         {% include 'footer.html' %}
     </main>
 {% endblock %}

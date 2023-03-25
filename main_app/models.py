@@ -83,3 +83,15 @@ class Slide(models.Model):
 
     def __str__(self):
         return f"slide - {self.index}"
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='gallery/', blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        ordering = ("date_added",)
+
+    def __str__(self):
+        return f"gallery - {self.title}"

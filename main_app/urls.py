@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('', Home.as_view(), name='home'),
     path('corporate-training/', CorporateTraining.as_view(), name='corporate_training'),
+    path('gallery/', GalleryView.as_view(), name='gallery'),
     # path('product-detail/<product_id>/', ProductDetailView.as_view(), name='product'),
     #
     # path('admin-home/', AdminHome.as_view(), name='s_home'),

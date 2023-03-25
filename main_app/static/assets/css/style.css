@@ -1,4 +1,7 @@
-{% load static %}
+{
+    % load static %
+}
+
 @font-face {
     font-family: 'Acens';
     src: url('Acens/Acens.ttf.woff') format('woff2');
@@ -24,6 +27,7 @@
     --secondary: #77c8a1;
     --text__title__sec: #258f5c;
     --tertiary: #4a89ac;
+    --borders: #dfdce6;
     --background: #fff;
     --dates: #424643;
     --text-color: #f688ff;
@@ -107,6 +111,11 @@ h6 {
 p {
     margin: 0 0 20px;
     line-height: 1.8em;
+}
+
+b,
+strong {
+    color: var(--text__title__sec);
 }
 
 .animated {
@@ -200,7 +209,7 @@ main#general {
     display: unset;
 }
 
-.main__menu ul li a {
+.hm__nav__item__link {
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     color: var(--white);
     display: block;
@@ -214,7 +223,8 @@ main#general {
     font-size: 12px;
 }
 
-.hm__nav__item__link:hover {
+.hm__nav__item__link:hover,
+.hm_nav_cat_item_link:hover {
     color: var(--primary);
 }
 
@@ -231,8 +241,20 @@ main#general {
     background: #f7fafb;*/
     text-transform: capitalize;
 }
+
 .course__nav__items__triggered {
     padding: 10px;
+}
+
+.hm_nav_cat_item {
+    display: block;
+    margin: 0;
+    text-align: left;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .main__body__banners {
@@ -925,6 +947,256 @@ section.cooperate__slide__items:before {
 }
 
 
+/* -------------------------------COURSE--------------------------- */
+
+.course__dp__img {
+    width: 100%;
+}
+
+.course__benefits {
+    width: 100%;
+    background-color: #fff;
+    /* padding: 34px; */
+    transition: all 0.6s ease;
+    /* box-shadow: 0 0 11px rgb(0 0 0 / 10%); */
+    /* min-height: 630px; */
+}
+
+.course__benefits h2 {
+    position: relative;
+    margin-bottom: 20px;
+    line-height: 46px;
+    font-weight: 800;
+    font-size: 2.3em;
+    text-transform: capitalize;
+}
+
+.course__benefits ul li {
+    margin-bottom: 9px;
+    position: relative;
+    margin-left: 26px;
+}
+
+.course__benefits ul li:before {
+    content: "\f0a4";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: var(--primary);
+    font-size: 17px;
+    font-weight: 500;
+    position: absolute;
+    left: -26px;
+}
+
+.register__btn {
+    margin-top: 11px;
+    background: var(--primary);
+    display: inline-block;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: var(--white);
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 26px;
+    padding: 10px 28px;
+    font-size: 0.9em;
+}
+
+.register__btn__2 {
+    margin-top: 11px;
+    background: var(--secondary);
+    display: inline-block;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: var(--white);
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 26px;
+    padding: 10px 28px;
+    font-size: 0.9em;
+}
+
+
+/* -------------------------------REGISTER FORM--------------------------- */
+
+.course__reg {
+    margin: auto;
+    background-color: var(--white);
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+}
+
+.course__reg__form h2 {
+    position: relative;
+    margin-bottom: 63px;
+    margin-top: 33px;
+}
+
+.course__reg__form h2:before {
+    content: "";
+    background: var(--primary);
+    position: absolute;
+    height: 3px;
+    width: 85px;
+    bottom: -24px;
+    left: 0;
+}
+
+.course__reg__form h2:after {
+    background: var(--secondary);
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 20px;
+    bottom: -29px;
+    left: 0;
+}
+
+.course__reg__form__divs {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.form__full__width,
+.form__half__width,
+.course__submit {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.course__reg__form label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text__gray);
+    margin: 12px 0px 8px 0px;
+}
+
+.course__reg__form select {
+    width: 100%;
+    padding: 6px 22px;
+    font-size: 16px;
+    border: 1px solid #dfdce6;
+    background: url(../images/down-arrow.png) no-repeat right #fff;
+    outline: none;
+    height: 50px;
+    color: #000;
+    font-size: 16px;
+    color: #777373;
+    background-position: 98% 53%;
+    box-shadow: none;
+    margin-bottom: 6px;
+}
+
+.course__form__input {
+    width: 100%;
+    box-shadow: none;
+    outline: none;
+    border: 1px solid var(--borders);
+    background: var(--white);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: "Poppins", sans-serif;
+    color: var(--secondary);
+    height: auto;
+    padding: 20px;
+    resize: none;
+    min-width: 100%;
+    height: 56px;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.course__submit__btn {
+    text-transform: capitalize;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 1em;
+    border: 1px solid var(--text__gray);
+}
+
+
+/* -------------------------------CHECKOUT PAGE--------------------------- */
+
+.checkout__review__section {
+    margin: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.order__review {
+    max-width: 100%;
+    flex: 100%;
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+
+.order__review__table {
+    border: 1px solid rgba(0, 0, 0, .1);
+    margin: 0 -1px 24px 0;
+    text-align: left;
+    width: 100%;
+    border-collapse: separate;
+    border-radius: 5px;
+}
+
+.order__review__table th {
+    font-weight: 700;
+    padding: 9px 12px;
+    line-height: 1.5em;
+    border: 1px solid #e0e0e0;
+}
+
+.order__review__table td {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 9px 12px;
+    vertical-align: middle;
+    line-height: 1.5em;
+    border: 1px solid #e0e0e0;
+}
+
+.order__review__table tfoot td {
+    font-weight: 700;
+}
+
+
+/* -------------------------------GALLERY PAGE--------------------------- */
+
+.our__gallery__info {
+    margin: 56px 0px 30px 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery__img__item__div {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.gallery__img {
+    padding: 0px 4px 8px 4px;
+    height: 340px;
+    object-fit: cover;
+}
+
+
 /* -------------------------------GENERAL SUPER-------------------------- */
 
 .container {
@@ -1036,6 +1308,20 @@ section.cooperate__slide__items:before {
         padding-right: 15px;
         padding-left: 15px;
     }
+    /* ----------------------------------REGISTER FORM --------------------------------------------------- */
+    .course__reg {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+    .form__half__width {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    /* -------------------------------GALLERY PAGE--------------------------- */
+    .gallery__img__item__div {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
     /* ---------------------------------GENERAL--------------------------------------------------------------- */
     .container {
         padding-left: 60px;
@@ -1109,7 +1395,10 @@ section.cooperate__slide__items:before {
         padding-left: 120px;
         padding-right: 120px;
     }
-    .main__menu ul li {
+    #main__nav__list {
+        display: flex;
+    }
+    .main__nav__list__item {
         display: inline-block;
         margin-right: 18px;
         position: relative;
@@ -1120,7 +1409,7 @@ section.cooperate__slide__items:before {
         transition: all 300ms ease-out 0s;
         text-transform: capitalize;
     }
-    .main__menu ul li a {
+    .hm__nav__item__link {
         padding: 16px 2px;
         font-weight: 500;
         font-size: 15px;
@@ -1129,9 +1418,16 @@ section.cooperate__slide__items:before {
         text-transform: capitalize;
     }
     .course__nav__items__triggered {
-        margin: 27px 0;
+        margin-top: 51px;
         position: absolute;
         padding: unset;
+        width: 220px;
+        background: var(--secondary);
+        z-index: 2;
+    }
+    .course__nav__items__triggered li a {
+        padding: 8px 20px;
+        font-size: 14px;
     }
     .course__nav__items a {
         padding: 0;
@@ -1240,6 +1536,14 @@ section.cooperate__slide__items:before {
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
+    }
+    .cooperate__slide__banner {
+        margin: 51px 0px 77px 0px;
+    }
+    /* -------------------------------GALLERY PAGE--------------------------- */
+    .gallery__img__item__div {
+        flex: 0 0 25%;
+        max-width: 25%;
     }
     /* ---------------------------------GENERAL--------------------------------------------------------------- */
     .container {

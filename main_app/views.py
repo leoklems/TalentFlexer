@@ -19,6 +19,7 @@ from django.core.mail import send_mail
 
 from .forms import *
 from .models import *
+from course_reg.models import Course
 from django.db.models import Count
 from django.db.models import Q
 
@@ -58,9 +59,13 @@ class Home(View):
 
     def get(self, *args, **kwargs):
         slides = Slide.objects.all()
+        site_info = SiteSetupModel.objects.get(index=0)
+        courses = Course.objects.all()
 
         context = {
             'slides': slides,
+            'site_info': site_info,
+            'courses': courses,
         }
 
         return render(self.request, 'home.html', context)
@@ -69,10 +74,26 @@ class Home(View):
 class CorporateTraining(View):
 
     def get(self, *args, **kwargs):
-        # slides = Slide.objects.all()
-        #
-        # context = {
-        #     'slides': slides,
-        # }
+        site_info = SiteSetupModel.objects.get(index=0)
+        courses = Course.objects.all()
 
-        return render(self.request, 'corporate_training.html')
+        context = {
+            'site_info': site_info,
+            'courses': courses,
+        }
+
+        return render(self.request, 'corporate_training.html', context)
+
+
+class GalleryView(View):
+
+    def get(self, *args, **kwargs):
+        site_info = SiteSetupModel.objects.get(index=0)
+        images = Gallery.objects.all()
+
+        context = {
+            'site_info': site_info,
+            'images': images,
+        }
+
+        return render(self.request, 'gallery.html', context)
