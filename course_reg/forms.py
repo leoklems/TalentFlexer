@@ -18,3 +18,9 @@ class LearnerForm(ModelForm):
             }),
 
         }
+
+
+class PaymentForForm(ModelForm):
+    class Meta:
+        model = Learner
+        fields = ['learner_id']

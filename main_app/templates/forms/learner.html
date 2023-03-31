@@ -26,7 +26,7 @@
                 <section class="coorporate__training__info__contact container">
                     <div class="course__reg">
 
-                        <form action="" method="post" class="course__reg__form">
+                        <form action="" method="post" class="course__reg__form" id="learner-form">
                             {% csrf_token %}
                             <h2>Course Registration Form</h2>
                             <div class="course__reg__form__divs">
@@ -47,7 +47,7 @@
                                             <label for="">First Name</label>
                                             <br>
                                             <span>
-                                                <input type="text" name="first_name" class="course__form__input" placeholder="Enter First Name">
+                                                <input type="text" name="first_name" class="course__form__input" placeholder="Enter First Name" required>
                                             </span>
                                         </p>
                                     </div>
@@ -58,7 +58,7 @@
                                             <label for="">Last Name</label>
                                             <br>
                                             <span>
-                                                <input type="text" name="last_name" class="course__form__input" placeholder="Enter Last Name">
+                                                <input type="text" name="last_name" class="course__form__input" placeholder="Enter Last Name" required>
                                             </span>
                                         </p>
                                     </div>
@@ -69,7 +69,7 @@
                                             <label for="">Phone Number</label>
                                             <br>
                                             <span>
-                                                <input type="tel" name="phone_no" class="course__form__input" placeholder="Enter Phone Number">
+                                                <input type="tel" name="phone_no" class="course__form__input" placeholder="Enter Phone Number" required>
                                             </span>
                                         </p>
                                     </div>
@@ -80,8 +80,9 @@
                                             <label for="">Email Address</label>
                                             <br>
                                             <span>
-                                                <input type="email" name="email" class="course__form__input" placeholder="Enter Email Address">
+                                                <input type="email" name="email" id="email" class="course__form__input" placeholder="Enter Email Address" required>
                                             </span>
+                                            <div class="alert alert-danger" id="em-err" role="alert">nxcmchg</div>
                                         </p>
                                     </div>
                                 </div>
@@ -91,7 +92,7 @@
                                             <label for="">Home Address</label>
                                             <br>
                                             <span>
-                                                <input type="text" name="address" class="course__form__input" placeholder="Enter Home Address">
+                                                <input type="text" name="address" class="course__form__input" placeholder="Enter Home Address" required>
                                             </span>
                                         </p>
                                     </div>
@@ -102,7 +103,7 @@
                                             <label for="">Province or State</label>
                                             <br>
                                             <span>
-                                                <input type="text" name="province_state" class="course__form__input" placeholder="Enter Province or State">
+                                                <input type="text" name="province_state" class="course__form__input" placeholder="Enter Province or State" required>
                                             </span>
                                         </p>
                                     </div>
@@ -113,7 +114,7 @@
                                             <label for="">City</label>
                                             <br>
                                             <span>
-                                                <input type="text" name="city" class="course__form__input" placeholder="Enter City">
+                                                <input type="text" name="city" class="course__form__input" placeholder="Enter City" required>
                                             </span>
                                         </p>
                                     </div>
@@ -124,7 +125,7 @@
                                             <label for="">Postal or Zipcode</label>
                                             <br>
                                             <span>
-                                                <input type="text" name="zip_code" class="course__form__input" placeholder="Enter Postal or Zipcode">
+                                                <input type="text" name="zip_code" class="course__form__input" placeholder="Enter Postal or Zipcode" required>
                                             </span>
                                         </p>
                                     </div>
@@ -143,5 +144,6 @@
 <!--        </main>-->
         {% include 'footer.html' %}
     </main>
-{% endblock %}
 
+{% endblock %}
+{% include 'validation_js.html' %}

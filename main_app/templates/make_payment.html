@@ -24,11 +24,37 @@
             </article>
             <article class="coorporate__training__info">
                 <section class="checkout__review__section container">
+                    {% if messages %}
+                    {% for m in messages %}
+                    <div class="course__reg alert alert-info">
+                        <h3 class="order__review__heading">{{m}}</h3>
+                        <br>
+                        <p>
+                            An email has been sent to {{payment.learner.email}}. You can complete the payment now to become fully registered or follow the instructions in the email to get fully enrolled for the course.
+                        </p>
+                        <div class="order__review">
+                            <table class="order__review__table">
+                                <thead>
+                                    <tr>
+                                        <th class="table__col__1">username</th>
+                                        <th class="table__col__2">{{payment.learner.learner_id}}</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    {%endfor%}
+                    {%else%}
+                    {%endif%}
                     <div class="course__reg">
                         <h3 class="order__review__heading">Your order</h3>
                         <div class="order__review">
                             <table class="order__review__table">
                                 <thead>
+                                    <tr>
+                                        <th class="table__col__1">username</th>
+                                        <th class="table__col__2">{{payment.learner.learner_id}}</th>
+                                    </tr>
                                     <tr>
                                         <th class="table__col__1">Product</th>
                                         <th class="table__col__2">Subtotal</th>
@@ -57,7 +83,7 @@
 
 
                                     <tr class="">
-                                        <th class="table__col__1">GST(30%)</th>
+                                        <th class="table__col__1">GST(13%)</th>
                                         <td><span class=""><span class="">$</span>{{payment.learner.vat}} CAD</span>
                                         </td>
                                     </tr>
@@ -146,11 +172,11 @@
 
                         window.location.replace("{% url 'course_reg:payment_completed' %}")
                     });
-                }
+                },
 
-    <!--            onError: (err) => {-->
-    <!--                window.location.replace("{% url 'course_reg:payment_failed' %}")-->
-    <!--            }-->
+                onError: (err) => {
+                    window.location.replace("{% url 'course_reg:payment_failed' payment.learner.learner_id%}")
+                }
 
 
             }).render('#paypal-button-container');

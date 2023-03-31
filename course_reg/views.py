@@ -23,17 +23,18 @@ from .models import *
 from main_app.models import SiteSetupModel
 from django.db.models import Count
 from django.db.models import Q
+
+
 # from paypal.standard.forms import PayPalPaymentsForm
 
 
 def random_int():
-    random_ref = randint(0, 9999999999)
+    random_ref = randint(0, 9999)
     uid = random_ref
     return uid
 
 
 class LearnerRegistration(CreateView):
-
     model = Learner
     form_class = LearnerForm
     template_name = 'forms/learner.html'
@@ -49,14 +50,19 @@ class LearnerRegistration(CreateView):
     def form_valid(self, form, *args, **kwargs):
         # print(self.request.POST)
         form = form.save(commit=False)
-        form.learner_id = random_int()
+        # Split the email by the "@" symbol and select the first part
+        text_part = form.email.split('@')[0]
+        # concatenate the text_part and the randomly generated number
+        form.learner_id = f"{text_part}{random_int()}".lower()
+        # Select the course from the Course model
         course = Course.objects.get(name=form.course)
-        form.vat = 0.3 * course.price
+        # Calculate and record the VAT
+        form.vat = 0.13 * course.price
+        # Calculate and record the total cost plus the vat for the course
         form.price = course.price + form.vat
 
         form.save()
-        # messages.success(self.request, 'Post was successfully added')
-        # return redirect('store:s_home')
+        messages.success(self.request, 'You have been successfully registered')
         learner = Learner.objects.get(learner_id=form.learner_id)
         payment = Payment(learner=learner, amount=learner.price, email=learner.email)
         payment.save()
@@ -75,13 +81,23 @@ class LearnerRegistration(CreateView):
 
 def verify_payment(request: HttpRequest, ref: str) -> HttpResponse:
     """
-    params: request
+    parameters
+    --------------
+    request:
+    ref: a reference key generated when the payment was initiated which is used here to track the payment
+    return: render the payment completed page
     """
+    # Get the payment object using the reference
     payment = get_object_or_404(Payment, ref=ref)
+    # Get the learner object using the payment
     learner = Learner.objects.get(learner_id=payment.learner.learner_id)
+    # Verify that payment has been completed
     payment.verified = True
+    # Record the updated payment
     payment.save()
+    # Update the payment status of the learner to "paid"
     learner.paid = True
+    # Record the updated payment status
     learner.save()
     # return redirect('course_reg:payment_completed')
     return render(request, 'payment_completed.html')
@@ -100,22 +116,41 @@ class CourseView(DetailView):
         context["site_info"] = site_info
         context["courses"] = courses
         return context
-    #
-    # def get(self, *args, **kwargs):
-    #     name = 'Intro to Python'
-    #     course = Course.objects.get(name=name)
-    #     # slides = Slide.objects.all()
-    #     # product_cats = ProductCategory.objects.all()
-    #     # product_images = ProductImage.objects.filter(lead=True)
-    #
-    #     context = {
-    #         'course': course,
-    #         # 'slides': slides,
-    #         # 'product_cats': product_cats,
-    #         # 'product_images': product_images,
-    #     }
-    #
-    #     return render(self.request, 'courses/intro_to_python.html', context)
+
+
+class PaymentFor(View):
+
+    def get(self, request):
+        site_info = SiteSetupModel.objects.get(index=0)
+        courses = Course.objects.all()
+
+        return render(request, 'forms/payment_for.html',
+                      {'site_info': site_info, 'courses': courses})
+
+    def post(self, request, *args, **kwargs):
+        learner_id = request.POST.get('learner_id')
+        learner = Learner.objects.get(learner_id=learner_id)
+        payment = Payment.objects.get(learner=learner)
+        payment_for_form = PaymentForForm(request.POST)
+        site_info = SiteSetupModel.objects.get(index=0)
+        courses = Course.objects.all()
+        if payment_for_form.is_valid():
+            # return redirect('app:register_student')
+            return render(self.request, 'make_payment.html',
+                          {'site_info': site_info, 'courses': courses, 'payment': payment, 'paypal_client_is': settings.PAYPAL_CLIENT_ID})
+
+        else:
+            # when the form has an error
+            print(payment_for_form.errors)
+            messages.success(request, 'Fill out all the necessary details ')
+            learner_id = request.GET.get('learner_id', None)
+            learner = Learner.objects.get(learner_id=learner_id)
+            payment = Payment(learner=learner, amount=learner.price, email=learner.email)
+            site_info = SiteSetupModel.objects.get(index=0)
+            courses = Course.objects.all()
+
+            return render(request, 'forms/payment_for.html',
+                          {'site_info': site_info, 'courses': courses})
 
 
 def payment_completed(request):
@@ -124,5 +159,37 @@ def payment_completed(request):
     return render(request, 'payment_completed.html', {'site_info': site_info, 'courses': courses})
 
 
-def payment_failed(request):
-    return render(request, 'payment_failed.html')
+def payment_failed(request: HttpRequest, learner_id: str) -> HttpResponse:
+    learner = Learner.objects.get(learner_id=learner_id)
+    payment = Payment(learner=learner, amount=learner.price, email=learner.email)
+    site_info = SiteSetupModel.objects.get(index=0)
+    courses = Course.objects.all()
+
+    return render(request, 'make_payment.html',
+                  {'payment': payment, 'site_info': site_info, 'courses': courses,
+                   'paypal_client_is': settings.PAYPAL_CLIENT_ID})
+
+
+def validate_email(request):
+    # to check if a user has already registered a chosen email
+    # collected by json to ajxa in form.js
+    email = request.GET.get('email', None)
+    data = {
+        'is_taken': Learner.objects.filter(email__iexact=email).exists()
+    }
+    return JsonResponse(data)
+
+
+def validate_learner_id(request):
+    feedback = dict()
+    learner_id = request.GET.get('learner_id', None)
+    learner = Learner.objects.filter(learner_id__iexact=learner_id).exists()
+    if learner:
+        learner = Learner.objects.get(learner_id=learner_id)
+        if learner.paid:
+            feedback['paid'] = 'paid'
+        else:
+            feedback['not_paid'] = 'not_paid'
+    else:
+        feedback['non_learner'] = 'non_learner'
+    return JsonResponse(feedback)

@@ -12,14 +12,14 @@ $(document).ready(function() {
         $('#hm_nav_cat_outs').toggleClass('menu_triggered');
     })
 
-//    $(".hm_nav_cat").click(function(event) {
-//        // event.preventDefault();
-//        // controling the contact us menu button link
-//        $('.hm_nav_cat').removeClass('hm_nav_cat_triggered');
-//        $('.hm__nav').toggleClass('hm__nav__triggered');
-//        // $('.fa-arrow-right').toggleClass('fa-arrow-down');
-//
-//    })
+    $(".sub__link").click(function(event) {
+        // event.preventDefault();
+        // controling the contact us menu button link
+        $('.main__menu').toggleClass('main__menu__trigger');
+        //    $('.hm__nav').toggleClass('hm__nav__triggered');
+        $('.fa-list').toggleClass('fa-times');
+
+    });
     currentSlide();
 });
 

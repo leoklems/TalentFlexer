@@ -1,0 +1,59 @@
+{% extends 'main_app.html' %}
+{% load static %}
+{% block title %}Make Payment{% endblock %}
+
+{% block content %}
+<main id="main">
+        {% include 'header.html' %}
+            <main id="main__body">
+            <article class="coorporate__slide__art">
+                <section class="cooperate__slide__items"
+                         style="background: url({% static 'assets/images/about-banner.jpg'%});">
+                    <div class="container cooperate__slide__banner">
+                        <h2 class="animates">Make payment</h2>
+                        <ul>
+                            <li><a href="{% url 'app:home' %}">Home</a>
+                            </li>
+                            <li>/</li>
+                            <li>Course</li>
+                            <li>/</li>
+                            <li>Make payment</li>
+                        </ul>
+                    </div>
+                </section>
+            </article>
+            <article class="coorporate__training__info">
+                <section class="coorporate__training__info__contact container">
+                    <div class="course__reg">
+                        <form method="post" class="course__reg__form" id="learner-form">
+                            {% csrf_token %}
+                            <h2>Make payment</h2>
+                            <div class="course__reg__form__divs">
+                                <div class="form__full__width">
+                                    <div class="form__group">
+                                        <p>
+                                            <label for="">Learner ID</label>
+                                            <br>
+                                            <span>
+                                                <input type="text" name="learner_id" class="course__form__input" id="learner_id" placeholder="Enter Learner ID" required>
+                                            </span>
+                                            <div class="alert alert-danger" id="learn-id-err" role="alert"></div>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="course__submit">
+                                    <input type="submit" class="course__submit__btn" id="payment_for_submit" value="Continue payment">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </article>
+        </main>
+<!--        </main>-->
+        {% include 'footer.html' %}
+    </main>
+
+{% endblock %}
+{% include 'validation_js.html' %}
