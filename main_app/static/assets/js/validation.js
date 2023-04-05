@@ -22,6 +22,7 @@ $(document).ready($(function () {
 
         $("#learn-id-err").hide();
         $("#payment_for_submit").hide();
+        $("#learner_registration_submit").hide();
 
 
         $("#em-err").hide();
@@ -51,6 +52,9 @@ $(document).ready($(function () {
         });
 
         $('#email').focusout(function(){
+            check_email();
+        });
+        $('#course').focusout(function(){
             check_email();
         });
 //
@@ -173,24 +177,28 @@ $(document).ready($(function () {
         function check_email() {
             var pattern= new RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/i);
             var email = $("#email").val()
+            var course = $("#course").val()
 
             $.ajax({
             url: 'validate-email',
             data: {
                 'email' : email,
+                'course' : course,
             },
             datatype : 'json',
             success: function(data){
                 if (data.is_taken){
                     if(pattern.test($("#email").val())){
-                        $("#em-err").text("user with this email already exists");
+                        $("#em-err").text("user with this email already exists for same course");
                         $("#em-err").show();
                         err_em = true;
                     }else{
                         $("#em-err").hide();
+                        $("#learner_registration_submit").show();
                     }
                 } else if(pattern.test($("#email").val())){
                         $("#em-err").hide();
+                        $("#learner_registration_submit").show();
                     }else{
                         $("#em-err").text("Invalid email address");
                         $("#em-err").show();

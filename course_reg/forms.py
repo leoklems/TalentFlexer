@@ -15,6 +15,7 @@ class LearnerForm(ModelForm):
         widgets = {
             'course': Select(attrs={
                 'class': 'course__reg__form__select',
+                'id': 'course',
             }),
 
         }

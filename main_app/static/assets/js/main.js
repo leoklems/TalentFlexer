@@ -20,6 +20,24 @@ $(document).ready(function() {
         $('.fa-list').toggleClass('fa-times');
 
     });
+
+    $("#nav__about__us").click(function(event) {
+        // event.preventDefault();
+        // controling the about us menu button link
+        $('.main__menu').toggleClass('main__menu__trigger');
+        //    $('.hm__nav').toggleClass('hm__nav__triggered');
+        $('.fa-list').toggleClass('fa-times');
+
+    });
+    $("#nav__contact__us").click(function(event) {
+        // event.preventDefault();
+        // controling the about us menu button link
+        $('.main__menu').toggleClass('main__menu__trigger');
+        //    $('.hm__nav').toggleClass('hm__nav__triggered');
+        $('.fa-list').toggleClass('fa-times');
+
+    });
+
     currentSlide();
 });
 

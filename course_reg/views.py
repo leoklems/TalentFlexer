@@ -2,7 +2,7 @@ from random import randint
 from time import timezone
 import json
 from django.core.paginator import Paginator
-from django.http import JsonResponse, FileResponse, HttpResponse, HttpResponseRedirect, HttpRequest
+from django.http import JsonResponse, FileResponse, HttpResponse, HttpResponseRedirect, HttpRequest, request
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -15,6 +15,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from itertools import chain
+from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -48,8 +50,19 @@ class LearnerRegistration(CreateView):
         return context
 
     def form_valid(self, form, *args, **kwargs):
-        # print(self.request.POST)
+        # print(self.request.POST.get('course'))
+        try:
+            learner = Learner.objects.get(email=self.request.POST.get('email'), course__id=self.request.POST.get('course'))
+            learner_exists = True
+        except:
+            learner_exists = False
+
+        if learner_exists:
+            site_info = SiteSetupModel.objects.get(index=0)
+            courses = Course.objects.all()
+            return render(self.request, 'forms/learner.html', {'form': form, 'site_info': site_info, 'courses': courses})
         form = form.save(commit=False)
+
         # Split the email by the "@" symbol and select the first part
         text_part = form.email.split('@')[0]
         # concatenate the text_part and the randomly generated number
@@ -64,13 +77,35 @@ class LearnerRegistration(CreateView):
         form.save()
         messages.success(self.request, 'You have been successfully registered')
         learner = Learner.objects.get(learner_id=form.learner_id)
+        print(learner.__dict__)
         payment = Payment(learner=learner, amount=learner.price, email=learner.email)
         payment.save()
+        domain = get_current_site(request).domain
+        # uidb68 = urlsafe_base64_encode(force_bytes(user.pk))
+        link = reverse('course_reg:make_payment')
+        activate_url = 'http://' + domain + link
+        email = self.request.POST.get('email')
+        email_subject = "Activate your account"
+        fro = settings.EMAIL_HOST_USER
+        email_body = "Hi " + str(
+            learner) + ", your ID is " + learner.learner_id + ". please use this link to make payment and complete " \
+                                                              "your enrollment " + activate_url
+        # print(email_body)
+        email = EmailMessage(
+            email_subject,
+            email_body,
+            # email_body,
+            fro,
+            [email],
+        )
+        email.send(fail_silently=False)
+
+        site_info = SiteSetupModel.objects.get(index=0)
+        courses = Course.objects.all()
 
         return render(self.request, 'make_payment.html',
-                      {'payment': payment, 'paypal_client_is': settings.PAYPAL_CLIENT_ID})
-        # form = PayPalPaymentsForm(initial=paypal_dict)
-        # return render(self.request, 'forms/paypal_form.html', {'form': form})
+                      {'site_info': site_info, 'courses': courses, 'payment': payment,
+                       'paypal_client_is': settings.PAYPAL_CLIENT_ID})
 
     def form_invalid(self, form, *args, **kwargs):
         site_info = SiteSetupModel.objects.get(index=0)
@@ -137,7 +172,8 @@ class PaymentFor(View):
         if payment_for_form.is_valid():
             # return redirect('app:register_student')
             return render(self.request, 'make_payment.html',
-                          {'site_info': site_info, 'courses': courses, 'payment': payment, 'paypal_client_is': settings.PAYPAL_CLIENT_ID})
+                          {'site_info': site_info, 'courses': courses, 'payment': payment,
+                           'paypal_client_is': settings.PAYPAL_CLIENT_ID})
 
         else:
             # when the form has an error
@@ -174,9 +210,26 @@ def validate_email(request):
     # to check if a user has already registered a chosen email
     # collected by json to ajxa in form.js
     email = request.GET.get('email', None)
-    data = {
-        'is_taken': Learner.objects.filter(email__iexact=email).exists()
-    }
+    course = request.GET.get('course', None)
+    learner = Learner.objects.filter(email__iexact=email).exists()
+    data = dict()
+    # {
+    #     'is_taken': Learner.objects.filter(email__iexact=email).exists()
+    # }
+    if learner:
+        learner = Learner.objects.get(email=email)
+        try:
+            Learner.objects.get(email=email, course_id=course)
+            print(learner)
+            data['is_taken'] = 'is_taken'
+        except:
+            data['is_not_taken'] = 'is_not_taken'
+        # if learner.id == course:
+        #     data['is_taken'] = 'is_taken'
+        # else:
+        #     data['is_not_taken'] = 'is_not_taken'
+    else:
+        data['is_not_taken'] = 'is_not_taken'
     return JsonResponse(data)
 
 
