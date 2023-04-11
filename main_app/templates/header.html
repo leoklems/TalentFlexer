@@ -5,7 +5,7 @@
                 <div class="main__header__top__div">
                     <section class="main__header__top__left">
                         <span class="hm__main__header__top__address">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-phone"></i>
                                 <span>{{site_info.address}}</span>
                         </span>
                         <span class="hm__main__header__top__email">
@@ -26,15 +26,15 @@
                 <div class="main__header__top__div">
                     <a href="{% url 'app:home' %}" class="logo__link"><img class="logo" src="{% static 'assets/images/logo.png'%}" alt=""></a>
                     <section class="main__topbar__info__area">
-                        <a href="" class="main__topbar__info">
+                        <a href="mailto:{{site_info.email}}" class="main__topbar__info">
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h6>Email Us</h6>
                                 <section>{{site_info.email}}</section>
                             </div>
                         </a>
-                        <a href="" class="main__topbar__info middle__phone">
-                            <i class="fas fa-map-marker-alt"></i>
+                        <a href="tel:{{site_info.mobile_1}}" class="main__topbar__info middle__phone">
+                            <i class="fas fa-phone"></i>
                             <div>
                                 <h6>Call Us</h6>
                                 <section>{{site_info.mobile_1}}</section>
