@@ -77,7 +77,7 @@ class LearnerRegistration(CreateView):
         form.save()
         messages.success(self.request, 'You have been successfully registered')
         learner = Learner.objects.get(learner_id=form.learner_id)
-        print(learner.__dict__)
+        # print(learner.__dict__)
         payment = Payment(learner=learner, amount=learner.price, email=learner.email)
         payment.save()
         domain = get_current_site(request).domain
@@ -88,9 +88,9 @@ class LearnerRegistration(CreateView):
         email_subject = "Activate your account"
         fro = settings.EMAIL_HOST_USER
         email_body = "Hi " + str(
-            learner) + ", your ID is " + learner.learner_id + ". please use this link to make payment and complete " \
+            learner) + ", your ID is " + learner.learner_id + ". If you have not completed your payment already, please use this link to make payment and complete " \
                                                               "your enrollment " + activate_url
-        # print(email_body)
+        # print("email :",email)
         email = EmailMessage(
             email_subject,
             email_body,

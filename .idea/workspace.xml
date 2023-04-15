@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b1060f5-4757-4c4d-99ab-c62dc6ddd6d3" name="Default Changelist" comment="add the collect static files">
+    <list default="true" id="4b1060f5-4757-4c4d-99ab-c62dc6ddd6d3" name="Default Changelist" comment="rectify notification email details">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TalentFlexer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/TalentFlexer/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course_reg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/course_reg/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/templates/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680662253213</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="rectify notification email details">
+      <created>1681217285512</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681217285512</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,6 +137,7 @@
     <MESSAGE value="additional pages to improve frontend" />
     <MESSAGE value="form validation and make payment page" />
     <MESSAGE value="form putting together the backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="form putting together the backend" />
+    <MESSAGE value="rectify notification email details" />
+    <option name="LAST_COMMIT_MESSAGE" value="rectify notification email details" />
   </component>
 </project>
