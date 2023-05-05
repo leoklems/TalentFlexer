@@ -13,4 +13,7 @@ urlpatterns = [
     path('<course_id>/', CourseView.as_view(), name='course'),
     path('make-payment/validate-learner-id', validate_learner_id, name='validate_learner_id'),
     path('course-registration/validate-email', validate_email, name='validate_email'),
+    path('payment/', payment, name='payment'),
+    path('payment/charge/<str:ref>/', charge, name='charge'),
 ]
+

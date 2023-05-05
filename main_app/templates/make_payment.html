@@ -98,6 +98,20 @@
                                 </tfoot>
                             </table>
                         </div><div id="paypal-button-container"></div>
+                        <form id="payment-form" method="POST" action="{% url 'course_reg:charge' payment.ref%}">
+                            {% csrf_token %}
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="{{ stripe_public_key }}"
+                                data-amount={{apparent_amount}}
+                                data-name="My Web App"
+                                data-description={{payment.learner.course}}
+                                data-image=""
+                                data-locale="auto"
+                                data-currency="cad"
+                                data-email="{{payment.learner.email}}"
+                                data-allow-remember-me="false">
+                            </script>
+                        </form>
                     </div>
 
                 </section>
@@ -181,4 +195,41 @@
 
             }).render('#paypal-button-container');
         </script>
+
+
+<!--    <div id="card-element"></div>-->
+<!--    <button id="submit-button">Pay</button>-->
+
+<!--    <script src="https://js.stripe.com/v3/"></script>-->
+<!--    <script>-->
+<!--    var stripe = Stripe('{{ settings.STRIPE_PUBLISHABLE_KEY }}');-->
+
+<!--    var elements = stripe.elements();-->
+<!--    var cardElement = elements.create('card');-->
+<!--    cardElement.mount('#card-element');-->
+
+<!--    var submitButton = document.getElementById('submit-button');-->
+<!--    submitButton.addEventListener('click', function(ev) {-->
+<!--        ev.preventDefault();-->
+<!--        stripe.confirmCardPayment('{{ client_secret }}', {-->
+<!--            payment_method: {-->
+<!--                card: cardElement,-->
+<!--                billing_details: {-->
+<!--                    name: '{{ request.user.get_full_name }}'-->
+<!--                }-->
+<!--            }-->
+<!--        }).then(function(result) {-->
+<!--            if (result.error) {-->
+<!--                // Show error to your customer-->
+<!--                console.log(result.error.message);-->
+<!--            } else {-->
+<!--                // The payment succeeded!-->
+<!--                console.log(result.paymentIntent);-->
+<!--                // Redirect to a confirmation page-->
+<!--&lt;!&ndash;                window.location.href = '/payment/confirmation/';&ndash;&gt;-->
+<!--                window.location.replace("{% url 'course_reg:payment_completed' %}")-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--    </script>-->
 {% endblock %}

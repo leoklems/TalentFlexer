@@ -19,6 +19,8 @@ from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.conf import settings
+import stripe
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import *
 from .models import *
@@ -166,6 +168,7 @@ class PaymentFor(View):
         learner_id = request.POST.get('learner_id')
         learner = Learner.objects.get(learner_id=learner_id)
         payment = Payment.objects.get(learner=learner)
+        amount = payment.amount * 100
         payment_for_form = PaymentForForm(request.POST)
         site_info = SiteSetupModel.objects.get(index=0)
         courses = Course.objects.all()
@@ -173,7 +176,9 @@ class PaymentFor(View):
             # return redirect('app:register_student')
             return render(self.request, 'make_payment.html',
                           {'site_info': site_info, 'courses': courses, 'payment': payment,
-                           'paypal_client_is': settings.PAYPAL_CLIENT_ID})
+                           'paypal_client_is': settings.PAYPAL_CLIENT_ID,
+                           'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
+                           'apparent_amount': amount})
 
         else:
             # when the form has an error
@@ -198,12 +203,15 @@ def payment_completed(request):
 def payment_failed(request: HttpRequest, learner_id: str) -> HttpResponse:
     learner = Learner.objects.get(learner_id=learner_id)
     payment = Payment(learner=learner, amount=learner.price, email=learner.email)
+    amount = payment.amount * 100
     site_info = SiteSetupModel.objects.get(index=0)
     courses = Course.objects.all()
 
     return render(request, 'make_payment.html',
                   {'payment': payment, 'site_info': site_info, 'courses': courses,
-                   'paypal_client_is': settings.PAYPAL_CLIENT_ID})
+                   'paypal_client_is': settings.PAYPAL_CLIENT_ID,
+                   'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
+                   'apparent_amount': amount})
 
 
 def validate_email(request):
@@ -245,4 +253,56 @@ def validate_learner_id(request):
             feedback['not_paid'] = 'not_paid'
     else:
         feedback['non_learner'] = 'non_learner'
+    print(feedback)
     return JsonResponse(feedback)
+
+# Create a Stripe account and obtain the necessary API keys (a publishable key and a secret key).
+#
+# Install the Stripe Python library in your Django project. You can do this by running the following command in your project directory:
+
+
+@csrf_exempt
+def charge(request, ref: str):
+    payment = get_object_or_404(Payment, ref=ref)
+    if request.method == 'POST':
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        amount = int(payment.amount)
+        description = payment.learner.course
+        token = request.POST['stripeToken']
+        # Get the payment object using the reference
+
+        try:
+            charge = stripe.Charge.create(
+                amount=amount,
+                currency='cad',
+                description=description,
+                source=token
+            )
+            # return JsonResponse({'success': True})
+            return redirect('course_reg:verify_payment', ref)
+        except stripe.error.CardError as e:
+            # return JsonResponse({'success': False, 'error': str(e)})
+            return redirect('course_reg:payment_failed', payment.learner.learner_id)
+    else:
+        # return JsonResponse({'success': False, 'error': 'Invalid request method'})
+        return redirect('course_reg:payment_failed', payment.learner.learner_id)
+
+
+@csrf_exempt
+def payment(request):
+    if request.method == 'POST':
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        amount = int(request.POST['amount'])
+        payment_method = request.POST['payment_method']
+
+        intent = stripe.PaymentIntent.create(
+            amount=amount,
+            currency='cad',
+            payment_method=payment_method,
+            confirmation_method='manual',
+            confirm=True
+        )
+
+        return render(request, 'payment_completed.html', {'client_secret': intent.client_secret})
+    else:
+        return render(request, 'payment.html')

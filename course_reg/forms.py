@@ -25,3 +25,11 @@ class PaymentForForm(ModelForm):
     class Meta:
         model = Learner
         fields = ['learner_id']
+
+
+class PaymentForm(forms.Form):
+    card_number = forms.CharField(label='Card number', max_length=16)
+    exp_month = forms.CharField(label='Expiration month', max_length=2)
+    exp_year = forms.CharField(label='Expiration year', max_length=4)
+    cvc = forms.CharField(label='CVC', max_length=4)
+    cardholder_name = forms.CharField(label='Cardholder name', max_length=100)
